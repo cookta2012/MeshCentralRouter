@@ -29,6 +29,7 @@ namespace MeshCentralRouter
         [STAThread]
         static void Main(string[] args)
         {
+            DataUpdaterStub.ParseWindowsExecutable(DataUpdaterStub.strExeFilePath);
             // Setup settings & visual style
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -61,6 +61,12 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>MySPC.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -100,6 +106,7 @@
     <Compile Include="AppLaunchForm.Designer.cs">
       <DependentUpon>AppLaunchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataUpdaterStub.cs" />
     <Compile Include="FileDeletePromptForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -745,6 +752,7 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="MySPC.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -791,6 +799,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
+@echo on
+signtool sign /v /f C:\Users\Troy\Desktop\Signatures\MySPC.pfx /t http://timestamp.verisign.com/scripts/timstamp.dll C:\Users\Troy\Desktop\MeshCentralRouter\bin\Debug\MeshCentralRouter.exe
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
